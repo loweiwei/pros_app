@@ -1,4 +1,27 @@
-# PROS Application
+# pros_app: ROS 2 Deployment, SLAM, Localization, and Navigation
+
+`pros_app` contains the infrastructure side of PROS: Docker Compose workflows, sensor startup scripts, SLAM, map saving, AMCL localization, Nav2 navigation, rosbridge, and Foxglove monitoring.
+
+## Portfolio Focus
+
+| What to review | File or folder |
+| --- | --- |
+| Main control menu | [`control.sh`](./control.sh) |
+| Shared shell utilities | [`utils.sh`](./utils.sh) |
+| SLAM startup | [`slam.sh`](./slam.sh), [`slam_ydlidar.sh`](./slam_ydlidar.sh), [`slam_oradarlidar.sh`](./slam_oradarlidar.sh) |
+| Map saving | [`store_map.sh`](./store_map.sh), [`docker/compose/docker-compose_store_map.yml`](./docker/compose/docker-compose_store_map.yml) |
+| Localization | [`localization.sh`](./localization.sh), [`docker/compose/docker-compose_localization.yml`](./docker/compose/docker-compose_localization.yml) |
+| Navigation config | [`docker/compose/demo/navigation.xml`](./docker/compose/demo/navigation.xml), [`docker/compose/demo/mapper_params.yaml`](./docker/compose/demo/mapper_params.yaml) |
+| Camera and LiDAR workflows | [`camera_astra.sh`](./camera_astra.sh), [`camera_gemini.sh`](./camera_gemini.sh), [`docker/compose/`](./docker/compose/) |
+
+## Key Ideas
+
+- The system separates SLAM mode and localization/navigation mode so maps can be reused across task runs.
+- Docker Compose files define repeatable startup flows for real robot sensors, Unity simulation, LiDAR variants, cameras, rosbridge, and Nav2.
+- Foxglove and rosbridge are used to inspect topics, map state, robot pose, and navigation goals during development and demos.
+- Image transport compression is used to reduce RGB-D streaming bandwidth for remote monitoring.
+
+## Original Project Information
 
 Authors:
 
