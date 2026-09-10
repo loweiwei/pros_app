@@ -2,6 +2,10 @@
 
 `pros_app` contains the infrastructure side of PROS: Docker Compose workflows, sensor startup scripts, SLAM, map saving, AMCL localization, Nav2 navigation, rosbridge, and Foxglove monitoring.
 
+## 路徑說明
+
+本 README 中的檔案路徑都相對於 `pros_app` repository 根目錄，例如 `docker/compose/docker-compose_slam.yml` 表示此 repo 內的 `docker/compose/docker-compose_slam.yml`。
+
 ## Portfolio Focus
 
 | What to review | File or folder |
@@ -64,7 +68,7 @@ This project contains the following 3 features shown above.
 
 ## Get Started
 
-Execute `control.sh` to start.
+Execute [`control.sh`](./control.sh) to start.
 
 - Main menu
   - Enter number to execute the script.
@@ -82,9 +86,9 @@ Execute `control.sh` to start.
 
 - Compatible with `docker-compose` and `docker compose`.
 
-- The destructor for each unit shell script is written in `utils.sh`, which is triggered by SIGINT.
+- The destructor for each unit shell script is written in [`utils.sh`](./utils.sh), which is triggered by SIGINT.
 
-- The `control.sh` triggers each destructor of the child process by sending SIGINT to them.
+- The [`control.sh`](./control.sh) triggers each destructor of the child process by sending SIGINT to them.
 
 - The command for removing items in the bash array has a known issue. It will remain an empty string after removing the item.
 
@@ -136,20 +140,20 @@ docker-compose -f <your-compose-file.yml> up
 
 1. 啟動 pros_app :
 
-   1. [docker-compose_slam.yml](https://github.com/otischung/pros_app/blob/main/docker-compose_slam.yml) (做並使用 fox glove 的 rosbridge 連接觀看點雲圖)
+   1. [`docker/compose/docker-compose_slam.yml`](./docker/compose/docker-compose_slam.yml) (做並使用 fox glove 的 rosbridge 連接觀看點雲圖)
 
 2. 啟動 pros_car :
 
-   1. 根據車型啟動 [car_control_2.sh](https://github.com/otischung/pros_car/blob/main/car_control_2.sh) or [car_control_4.sh](https://github.com/otischung/pros_car/blob/main/car_control_2.sh) 腳本
+   1. 根據車型到 `pros_car` repository 啟動對應車體控制腳本，例如 [`pros_car/car_control.sh`](https://github.com/loweiwei/pros_car/blob/main/car_control.sh)
    2. 控制車子掃描地圖 (可用fox glove觀察)
 
 3. 啟動 pros_app:
 
-   1. [docker-compose_store_map.yml](https://github.com/otischung/pros_app/blob/main/docker-compose_store_map.yml)，將目前 slam 製作成地圖
+   1. [`docker/compose/docker-compose_store_map.yml`](./docker/compose/docker-compose_store_map.yml)，將目前 slam 製作成地圖
 
-4. 關閉 pros_app 的 [docker-compose_slam.yml](https://github.com/otischung/pros_app/blob/main/docker-compose_slam.yml)，並開啟 pros_app (因為 slam 和 localization 不能同時開) :
+4. 關閉 pros_app 的 [`docker/compose/docker-compose_slam.yml`](./docker/compose/docker-compose_slam.yml)，並開啟 localization 流程 (因為 slam 和 localization 不能同時開) :
 
-   1. [docker-compose_localization.yml](https://github.com/otischung/pros_app/blob/main/docker-compose_localization.yml)，並用 fox glove 查看目前車子的位置並做定位後修正目前點雲圖
+   1. [`docker/compose/docker-compose_localization.yml`](./docker/compose/docker-compose_localization.yml)，並用 fox glove 查看目前車子的位置並做定位後修正目前點雲圖
 
    [https://inegm.medium.com/persistent-names-for-usb-serial-devices-in-linux-dev-ttyusbx-dev-custom-name-fd49b5db9af1](https://inegm.medium.com/persistent-names-for-usb-serial-devices-in-linux-dev-ttyusbx-dev-custom-name-fd49b5db9af1)
 
